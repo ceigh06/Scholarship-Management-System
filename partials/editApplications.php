@@ -1,5 +1,5 @@
 <?php
-include_once 'conn.php';
+include_once '../includes/conn.php';
 $app_id = $_GET['app'];
 
 $applicationResult = $dbconn->query("SELECT a.*, u.* FROM application as a JOIN users as u on a.user_id=u.user_id WHERE a.application_ID='$app_id'");
@@ -8,7 +8,9 @@ $applications = $applicationResult->fetch_assoc();
 
 <div class="modal-header">
     <h2>Edit Application #<?php echo $applications['application_ID']; ?></h2>
-    <p class="applicant-name"><?php echo $applications['first_name'] . ' ' . $applications['middle_name'] . ' ' . $applications['last_name']; ?></p>
+    <p class="applicant-name">
+        <?php echo $applications['first_name'] . ' ' . $applications['middle_name'] . ' ' . $applications['last_name']; ?>
+    </p>
 </div>
 
 <div class="modal-body">
@@ -23,17 +25,18 @@ $applications = $applicationResult->fetch_assoc();
         <input type="date" name="application_date" value="<?php echo $applications['application_date'] ?>">
 
         <label>Combined Annual Salary</label>
-        <input type="text" name="combined_annual_gross_income" value="<?php echo $applications['combined_annual_gross_income'] ?>">
+        <input type="text" name="combined_annual_gross_income"
+            value="<?php echo $applications['combined_annual_gross_income'] ?>">
 
         <label>Gender</label>
         <div class="select-wrapper">
             <select name="gender">
                 <?php
-                    $genders = ['Male', 'Female'];
-                    foreach($genders as $gender) {
-                        $selected = ($applications['gender'] == $gender) ? 'selected' : '';
-                        echo "<option value='$gender' $selected>$gender</option>";
-                    }
+                $genders = ['Male', 'Female'];
+                foreach ($genders as $gender) {
+                    $selected = ($applications['gender'] == $gender) ? 'selected' : '';
+                    echo "<option value='$gender' $selected>$gender</option>";
+                }
                 ?>
             </select>
         </div>
@@ -48,11 +51,11 @@ $applications = $applicationResult->fetch_assoc();
         <div class="select-wrapper">
             <select name="eligibility">
                 <?php
-                    $eligibilities = ['Qualified', 'Not Qualified'];
-                    foreach($eligibilities as $eligibility) {
-                        $selected = ($applications['eligibility'] == $eligibility) ? 'selected' : '';
-                        echo "<option value='$eligibility' $selected>$eligibility</option>";
-                    }
+                $eligibilities = ['Qualified', 'Not Qualified'];
+                foreach ($eligibilities as $eligibility) {
+                    $selected = ($applications['eligibility'] == $eligibility) ? 'selected' : '';
+                    echo "<option value='$eligibility' $selected>$eligibility</option>";
+                }
                 ?>
             </select>
         </div>
@@ -61,11 +64,11 @@ $applications = $applicationResult->fetch_assoc();
         <div class="select-wrapper">
             <select name="applicant_status">
                 <?php
-                    $statuses = ['Pending', 'Approved', 'Rejected'];
-                    foreach($statuses as $status) {
-                        $selected = ($applications['applicant_status'] == $status) ? 'selected' : '';
-                        echo "<option value='$status' $selected>$status</option>";
-                    }
+                $statuses = ['Pending', 'Approved', 'Rejected'];
+                foreach ($statuses as $status) {
+                    $selected = ($applications['applicant_status'] == $status) ? 'selected' : '';
+                    echo "<option value='$status' $selected>$status</option>";
+                }
                 ?>
             </select>
         </div>

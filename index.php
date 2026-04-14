@@ -1,7 +1,6 @@
 <?php
 session_start();
 
-// Handle logout
 if (isset($_GET['logout'])) {
     $_SESSION = array();
     session_destroy();
@@ -18,26 +17,32 @@ $role = $_SESSION['roles'] ?? null;
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="assets/style.css">
-    <script src="assets/script.js"></script>
     <title>GKS Online Application</title>
 </head>
 
 <body>
 
     <?php
-    // include makes it that we stay on the index without redirecting the url
     if ($role === 'Admin') {
         include 'views/adminIndex.php';
-
     } elseif ($role === 'Student') {
         include 'views/studentIndex.php';
-
     } else {
-        // Not logged in — show login form
-        include 'views/guest.php';
-
+        include 'views/guest.php';  // this has #modal and #bg-modal in it
     }
     ?>
+
+    <!-- scripts AFTER the DOM so #modal etc. exist before scripts run -->
+    <script src="assets/jquery-4.0.0.min.js"></script>
+    <script src="assets/script.js?v=<?= time() ?>"></script>
+
+    <?php if ($role === 'Admin'): ?>
+        <script>loadPage('partials/dashboard.php');</script>
+    <?php elseif ($role === 'Student'): ?>
+        <script>loadPage('partials/studentApply.php');</script>
+    <?php else: ?>
+        <script>openModal('forms/loginForm.php');</script>
+    <?php endif; ?>
 
 </body>
 

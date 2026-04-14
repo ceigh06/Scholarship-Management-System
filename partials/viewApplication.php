@@ -1,5 +1,5 @@
 <?php
-include_once 'conn.php';
+include_once '../includes/conn.php';
 $app_id = $_GET['app'];
 
 $applicationResult = $dbconn->query("SELECT a.*, u.* FROM application as a JOIN users as u on a.user_id=u.user_id WHERE a.application_ID='$app_id'");
@@ -7,12 +7,14 @@ $applications = $applicationResult->fetch_assoc();
 ?>
 <div class="modal-header">
     <h2>Application ID<?php echo $applications['application_ID']; ?></h2>
-    <p class="applicant-name"><?php echo $applications['first_name'] . ' ' . $applications['middle_name'] . ' ' . $applications['last_name']; ?></p>
+    <p class="applicant-name">
+        <?php echo $applications['first_name'] . ' ' . $applications['middle_name'] . ' ' . $applications['last_name']; ?>
+    </p>
 </div>
 
 <div class="modal-body">
     <form action="statusProcess.php" method="post" class="view-form">
-        
+
         <div class="form-group">
             <label>Address</label>
             <input type="text" value="<?php echo $applications['applicant_address'] ?>" disabled>
@@ -54,7 +56,7 @@ $applications = $applicationResult->fetch_assoc();
         </div>
 
         <input type="hidden" name="application_id" value="<?php echo $applications['application_ID'] ?>">
-        
+
         <!-- this is a simple version lang for me to text the UI -->
         <div class="modal-actions">
             <button type="submit" name="status" value="Approved" class="btn-approve">Approve</button>
