@@ -16,7 +16,7 @@ $stmt->execute();
 $user = $stmt->get_result()->fetch_assoc();
 
 if ($user && password_verify($user_password, $user['user_password'])) {
-    $_SESSION['user_id'] = $user['user_id'];
+    $_SESSION['user_ID'] = $user['user_ID'];
     $_SESSION['user_email'] = $user['user_email'];
     $_SESSION['roles'] = $user['roles'];
 

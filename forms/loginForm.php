@@ -1,21 +1,16 @@
-<div id="bg-modal"></div>
+<!-- Only the form content, no <html>, <head>, <body>, or page structure -->
 
-<div id="modal">
-    <div class="modal-header">
-        <h2>Login</h2>
-        <p>Please enter your credentials</p>
-    </div>
 
-    <div class="modal-body">
-        <div class="content" id="content-area">
-            <form action="process/loginProcess.php" method="post">
-                Email: <input type="email" name="user_email" required><br>
-                Password: <input type="password" name="user_password" required><br>
-                <input type="submit" name="submit" value="Login"><br>
-            </form>
-            <p>Don't have an account? - <a href="process/registerForm.php">Sign up here</a></p>
-        </div>
-    </div>
+<div class="form-box">
+    <h1>Login</h1>
+    <form action="process/loginProcess.php" method="post">
+        <label>Email</label>
+        <input type="email" name="user_email" required><br>
+
+        <label>Password</label>
+        <input type="password" name="user_password" required><br>
+
+        <input type="submit" name="submit" value="Login"><br>
+    </form>
+    <p>Don't have an account? – <a href="#" onclick="loadPage('forms/registerForm.php')">Sign up here</a></p>
 </div>
-
-</body>

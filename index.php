@@ -21,7 +21,7 @@ $role = $_SESSION['roles'] ?? null;
 </head>
 
 <body>
-
+    
     <?php
     if ($role === 'Admin') {
         include 'views/adminIndex.php';
@@ -46,7 +46,7 @@ $role = $_SESSION['roles'] ?? null;
 
 </body>
 
-<div class="content" id="content-area"></div>
+
 <div id="bg-modal"></div>
 <div id="modal"></div>
 

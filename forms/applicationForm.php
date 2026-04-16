@@ -1,3 +1,10 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
+$user_ID = $_SESSION['user_ID'] ?? '';
+?>
+
 <div class="application-container">
   <div class="sidebar">
     <h2>Application Form</h2>
@@ -9,10 +16,13 @@
   </div>
 
   <div class="form-panel">
-    <form action="addApplication.php" method="post">
+    <form action="process/addApplication.php" method="post">
+      <input type="hidden" name="user_ID" value="<?= htmlspecialchars($user_ID) ?>">
+
+      <!-- Optional: Show User ID as read-only text -->
       <div class="form-group">
         <label>User ID</label>
-        <input type="text" name="user_ID" required>
+        <input type="text" value="<?= htmlspecialchars($user_ID) ?>" disabled style="background-color: #e9ecef;">
       </div>
 
       <div class="form-group">
@@ -75,7 +85,7 @@
 
       <div class="form-actions">
         <input type="submit" name="submit" value="Submit" class="btn-submit">
-        <button type="button" id="close-modal" class="btn-cancel" onclick="history.back()">Cancel</button>
+        <button type="button" id="close-modal" class="btn-cancel" onclick="closeModal()">Cancel</button>
       </div>
     </form>
   </div>

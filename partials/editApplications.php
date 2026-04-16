@@ -20,7 +20,7 @@ $app = $stmt->get_result()->fetch_assoc();
 </div>
 
 <div class="modal-body">
-    <form action="process/editProcess.php" method="post" class="view-form">
+    <form action="process/editProcess.php" method="post" class="view-form ajax-form">
         <input type="hidden" name="application_id" value="<?= htmlspecialchars($app['application_ID']) ?>">
 
         <div class="form-group">
@@ -98,7 +98,7 @@ $app = $stmt->get_result()->fetch_assoc();
         </div>
 
         <div class="modal-actions full-width">
-            <button type="submit" class="btn-approve">Save Changes</button>
+            <button type="submit"  class="btn-approve">Save Changes</button>
             <button type="button" onclick="closeModal()" class="btn-cancel">Cancel</button>
         </div>
     </form>

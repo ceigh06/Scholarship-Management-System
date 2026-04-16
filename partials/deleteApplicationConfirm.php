@@ -8,7 +8,8 @@ $application_ID = isset($_GET['app']) ? $_GET['app'] : '';
     <p class="delete-warning">This action cannot be undone.</p>
     <br>
     <div class="modal-actions">
-        <button onclick="deleteApplication('<?= htmlspecialchars($application_ID) ?>')" class="btn-reject">Delete</button>
+        <button onclick="deleteApplication('<?= htmlspecialchars($application_ID, ENT_QUOTES, 'UTF-8') ?>')"
+            class="btn-reject">Delete</button>
         <button onclick="closeModal()" class="btn-cancel">Cancel</button>
     </div>
 </div>

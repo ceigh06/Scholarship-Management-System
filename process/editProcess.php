@@ -34,7 +34,7 @@ $stmt = $dbconn->prepare("UPDATE application SET
     eligibility = ?, applicant_status = ?, gender = ?
     WHERE application_ID = ?");
 $stmt->bind_param(
-    'sssdsssss s',
+    'sssdssssss',
     $application_date,
     $applicant_address,
     $birthdate,
@@ -49,6 +49,6 @@ $stmt->bind_param(
 $stmt->execute();
 
 // Redirect back to the applications list inside the SPA
-header("Location: ../index.php?load=applications");
+echo "<script>loadPage('partials/applications.php');</script>";
 exit();
 ?>

@@ -2,7 +2,7 @@
 session_start();
 include_once '../includes/conn.php';
 
-$user_id = $_SESSION['user_id'];
+$user_id = $_SESSION['user_ID'];
 
 $scholarshipResult = $dbconn->query('SELECT * FROM scholarships LIMIT 1');
 $scholarship = $scholarshipResult->fetch_assoc();
