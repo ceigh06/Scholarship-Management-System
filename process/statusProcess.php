@@ -8,6 +8,6 @@ $stmt = $dbconn->prepare("UPDATE application SET applicant_status = ? WHERE appl
 $stmt->bind_param('ss', $status, $application_id);
 $stmt->execute();
 
-header("Location: ../index.php?load=applications");
+echo "<script>loadPage('partials/applications.php');</script>";
 exit();
 ?>

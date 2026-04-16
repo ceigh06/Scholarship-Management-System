@@ -7,6 +7,10 @@ $sql = "SELECT a.*, u.first_name, u.middle_name, u.last_name
 $applications = $dbconn->query($sql);
 ?>
 
+<div>
+    <button class="addApp" onclick="openModal('forms/applicationForm.php');">+ Application</button>
+</div>
+
 <div class="benefits">
     <table>
         <thead>
@@ -23,11 +27,11 @@ $applications = $dbconn->query($sql);
             <?php if ($applications && $applications->num_rows > 0): ?>
                 <?php foreach ($applications as $application): ?>
                     <?php
-                    $appId    = $application['application_ID'];
+                    $appId = $application['application_ID'];
                     $fullName = trim($application['first_name'] . ' ' . $application['middle_name'] . ' ' . $application['last_name']);
-                    $appDate  = $application['application_date'];
+                    $appDate = $application['application_date'];
                     $eligibility = $application['eligibility'];
-                    $status   = $application['applicant_status'];
+                    $status = $application['applicant_status'];
                     ?>
                     <tr>
                         <td><?= htmlspecialchars($appId) ?></td>
@@ -38,7 +42,8 @@ $applications = $dbconn->query($sql);
                         <td class="actionButtons">
                             <button onclick="openModal('partials/viewApplication.php?app=<?= $appId ?>')">View</button>
                             <button onclick="openModal('partials/editApplications.php?app=<?= $appId ?>')">Edit</button>
-                            <button onclick="openModal('partials/deleteApplicationConfirm.php?app=<?= $appId ?>')">Delete</button>
+                            <button
+                                onclick="openModal('partials/deleteApplicationConfirm.php?app=<?= $appId ?>')">Delete</button>
                         </td>
                     </tr>
                 <?php endforeach; ?>

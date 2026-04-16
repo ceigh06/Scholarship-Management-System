@@ -544,11 +544,12 @@ table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
-  background-color: var(--clr-white);
-  border-radius: var(--radius-lg);
+  background-color: white;
+  border-radius: 20px;
   overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  border: 2px solid var(--clr-primary-pale);
+  margin-top: 50px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 2px solid #c4b5fd;
 }
 
 th {
@@ -1238,4 +1239,45 @@ tr:hover td {
   max-width: 1200px;
   padding: 40px;
   margin: 0 auto;
+}
+
+.addApp {
+  position: absolute;
+  right: 40px;
+  cursor: pointer;
+  background-color: green;
+  color: #ffffff;
+  font-family: "Arial";
+  border-radius: 20px;
+  border: 0;
+  margin: 10px;
+  margin-top: 20px;
+  margin-right: 90px;
+  width: 120px;
+  height: 40px;
+  transition: all 0.3s ease;
+  text-transform: capitalize;
+}
+
+.addApp:hover {
+  background-color: #22ad06;
+}
+
+.logOutBtn {
+  position: absolute;
+  right: 40px;
+  cursor: pointer;
+  background-color: #40007cbe;
+  color: #ffffff;
+  font-family: "Sogeo UI", "Arial";
+  border-radius: 5px;
+  margin: 0px;
+  width: 80px;
+  height: 40px;
+  transition: all 0.3s ease;
+  text-transform: capitalize;
+}
+
+.logOutBtn:hover {
+  background-color: #51009cbe;
 }

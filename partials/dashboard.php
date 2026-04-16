@@ -2,9 +2,9 @@
 include_once '../includes/conn.php';
 
 $totalApplications = $dbconn->query("SELECT COUNT(*) as total FROM application")->fetch_assoc()['total'];
-$totalApproved     = $dbconn->query("SELECT COUNT(*) as total FROM application WHERE applicant_status = 'Approved'")->fetch_assoc()['total'];
-$totalPending      = $dbconn->query("SELECT COUNT(*) as total FROM application WHERE applicant_status = 'Pending'")->fetch_assoc()['total'];
-$totalRejected     = $dbconn->query("SELECT COUNT(*) as total FROM application WHERE applicant_status = 'Rejected'")->fetch_assoc()['total'];
+$totalApproved = $dbconn->query("SELECT COUNT(*) as total FROM application WHERE applicant_status = 'Approved'")->fetch_assoc()['total'];
+$totalPending = $dbconn->query("SELECT COUNT(*) as total FROM application WHERE applicant_status = 'Pending'")->fetch_assoc()['total'];
+$totalRejected = $dbconn->query("SELECT COUNT(*) as total FROM application WHERE applicant_status = 'Rejected'")->fetch_assoc()['total'];
 ?>
 
 <div class="dashboard-container">
@@ -30,7 +30,8 @@ $totalRejected     = $dbconn->query("SELECT COUNT(*) as total FROM application W
 
         <div class="quick-actions">
             <h3>Quick Actions</h3>
-            <a href="#" onclick="loadPage('partials/applications.php')" class="action-btn">View Applications</a>
+            <!-- IBAHIN TO AH NOTE TO CHETYDRL -->
+            <a href="#" onclick="openModal('forms/applicationForm.php')" class="action-btn">Add Scholarships</a>
             <a href="#" onclick="loadPage('partials/applications.php')" class="action-btn">Approve Scholarships</a>
         </div>
     </div>

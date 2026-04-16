@@ -20,7 +20,7 @@ $app = $stmt->get_result()->fetch_assoc();
 </div>
 
 <div class="modal-body">
-    <form action="process/statusProcess.php" method="post" class="view-form">
+    <form action="process/statusProcess.php" method="post" class="view-form ajax-form">
         <input type="hidden" name="application_id" value="<?= htmlspecialchars($app['application_ID']) ?>">
 
         <div class="form-group">
@@ -57,8 +57,11 @@ $app = $stmt->get_result()->fetch_assoc();
         </div>
 
         <div class="modal-actions full-width">
-            <button type="submit" name="status" value="Approved" class="btn-approve">Approve</button>
-            <button type="submit" name="status" value="Rejected" class="btn-reject">Reject</button>
+            <input type="hidden" name="status" id="status-input" value="">
+            <button type="submit" class="btn-approve"
+                onclick="document.getElementById('status-input').value='Approved'">Approve</button>
+            <button type="submit" class="btn-reject"
+                onclick="document.getElementById('status-input').value='Rejected'">Reject</button>
             <button type="button" onclick="closeModal()" class="btn-cancel">Cancel</button>
         </div>
     </form>

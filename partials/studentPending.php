@@ -2,8 +2,8 @@
 session_start();
 include_once '../includes/conn.php';
 
-$user_id = $_SESSION['user_id'];
-$studentResult = $dbconn->query("SELECT * FROM users WHERE user_id = '$user_id'");
+$user_ID = $_SESSION['user_ID'];
+$studentResult = $dbconn->query("SELECT * FROM users WHERE user_ID = '$user_ID'");
 $student = $studentResult->fetch_assoc();
 
 $scholarshipResult = $dbconn->query('SELECT * FROM scholarships LIMIT 1');

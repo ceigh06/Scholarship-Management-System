@@ -1,3 +1,33 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+include_once __DIR__ . '/../includes/conn.php';
+
+$user_ID = $_SESSION['user_ID'];
+
+$appCheck = $dbconn->prepare("SELECT applicant_status FROM application WHERE user_ID = ?");
+$appCheck->bind_param('i', $user_ID);
+$appCheck->execute();
+$existingApp = $appCheck->get_result()->fetch_assoc();
+
+if (!$existingApp) {
+    $initialPage = 'partials/studentHome.php';
+} else {
+    switch ($existingApp['applicant_status']) {
+        case 'Approved':
+            $initialPage = 'partials/studentAccepted.php';
+            break;
+        case 'Rejected':
+            $initialPage = 'partials/studentRejected.php';
+            break;
+        default: // Pending or any other status
+            $initialPage = 'partials/studentPending.php';
+            break;
+    }
+}
+?>
+
 <body>
     <header class="header">
         <img src="GKSLogo.png" alt="Foundation Logo" class="logo">
@@ -6,6 +36,7 @@
             Gintong Kabataan Scholarship<br>
             Online Application
         </h1>
+        <button class="logOutBtn" onclick="window.location.href='index.php?logout=1'">Log out</button>
     </header>
 
 
@@ -23,9 +54,8 @@
         <p>
             <button onclick="location.href='mailto:piaamandarebuelta@gmail.com'">Contact Us</button>
     </footer>
-    <a href="index.php?logout=1">Logout</a>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            loadPage('partials/studentHome.php');
+            loadPage('<?= $initialPage ?>');
         });
     </script>

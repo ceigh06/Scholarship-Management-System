@@ -1,20 +1,10 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 include_once __DIR__ . '/../includes/conn.php';
-// $student_number=$_GET['sno'];
-$studentResult = $dbconn->query('select * from users');
-$student = $studentResult->fetch_assoc();
-?>
 
-<?php
-include_once __DIR__ . '/../includes/conn.php';
-// $student_number=$_GET['sno'];
-$studentResult = $dbconn->query('select * from users');
-$student = $studentResult->fetch_assoc();
-?>
-
-<?php
-include_once __DIR__ . '/../includes/conn.php';
-$scholarshipResult = $dbconn->query('select * from scholarships');
+$scholarshipResult = $dbconn->query('SELECT * FROM scholarships LIMIT 1');
 $scholarship = $scholarshipResult->fetch_assoc();
 ?>
 
