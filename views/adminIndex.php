@@ -20,6 +20,7 @@
 
 <!-- THIS is the only content area. Everything swaps in here. -->
 <div id="content-area"></div>
-
 <div id="bg-modal"></div>
-<div id="modal"></div>
+<div id="modal">
+    <div id="modal-content"></div>
+</div>

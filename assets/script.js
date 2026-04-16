@@ -55,21 +55,28 @@ function loadPage(url, navLink) {
 }
 
 // ─── Modal ──────────────────────────────────────────────────────────────────
+function setInnerHTMLWithScripts(container, html) {
+  container.innerHTML = html;
+  container.querySelectorAll("script").forEach((oldScript) => {
+    const newScript = document.createElement("script");
+    newScript.textContent = oldScript.textContent;
+    oldScript.parentNode.replaceChild(newScript, oldScript);
+  });
+}
 
 function openModal(url) {
   fetch(url)
-    .then((response) => response.text())
-    .then((data) => {
-      document.getElementById("modal").innerHTML = data;
-      document.getElementById("bg-modal").style.display = "block";
+    .then((res) => res.text())
+    .then((html) => {
+      setInnerHTMLWithScripts(document.getElementById("modal-content"), html);
       document.getElementById("modal").style.display = "block";
+      document.getElementById("bg-modal").style.display = "block";
     });
 }
 
 function closeModal() {
-  document.getElementById("bg-modal").style.display = "none";
   document.getElementById("modal").style.display = "none";
-  document.getElementById("modal").innerHTML = "";
+  document.getElementById("bg-modal").style.display = "none";
 }
 
 // Close modal when clicking the background overlay
@@ -124,13 +131,15 @@ document.addEventListener("submit", function (e) {
   }
 });
 
-
 function deleteApplication(appId) {
-    $.get('process/deleteApplication.php?app=' + encodeURIComponent(appId), function(data) {
-        $('.delete-confirm').html(data);
-        if (data.includes('successfully')) {
-            loadPage('partials/applications.php');
-            setTimeout(closeModal, 1500);
-        }
-    });
+  $.get(
+    "process/deleteApplication.php?app=" + encodeURIComponent(appId),
+    function (data) {
+      $(".delete-confirm").html(data);
+      if (data.includes("successfully")) {
+        loadPage("partials/applications.php");
+        setTimeout(closeModal, 1500);
+      }
+    },
+  );
 }

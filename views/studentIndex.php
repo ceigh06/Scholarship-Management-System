@@ -47,8 +47,10 @@ if (!$existingApp) {
     </div>
 
     <div id="bg-modal"></div>
-    <div id="modal"></div>
-
+    <div id="modal">
+        <div id="modal-content"></div>
+    </div>
+    
     <footer class="footer">
         <p> © Copyright 2026. Powered by BSIT 2AG2 Group 2
         <p>

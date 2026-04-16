@@ -143,6 +143,12 @@ main {
   transition: var(--transition);
 }
 
+.RegLog-btn a.active {
+  background-color: var(--clr-primary-mid);
+  border-color: var(--clr-primary-mid);
+  color: var(--clr-white);
+}
+
 .RegLog-btn a:hover {
   transform: translateY(-2px);
   box-shadow:
@@ -843,7 +849,7 @@ tr:hover td {
   left: 0;
   width: 100%;
   height: 100vh;
-  background-image: url("assets/images/bgPic.jpg");
+  background-image: url("images/bgPic.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
