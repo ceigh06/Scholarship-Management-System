@@ -1,83 +1,80 @@
-<div id="content-area">
-    <?php
-        include_once 'conn.php';
-        // $student_number=$_GET['sno'];
-        $reqResult=$dbconn->query('select * from scholarships_requirements');
-        $requirements=$reqResult->fetch_all(MYSQLI_ASSOC);  
-    ?>
+<?php
+session_start();
+include_once '../includes/conn.php';
 
-    <?php
-        include_once 'conn.php';
-        // $student_number=$_GET['sno'];
-        $studentResult=$dbconn->query('select * from users');
-        $student=$studentResult->fetch_assoc();   
-    ?>
-    
-    <?php
-        include_once 'conn.php';
-        $scholarshipResult=$dbconn->query('select * from scholarships');
-        $scholarship=$scholarshipResult->fetch_assoc();   
-    ?>
-    
+$user_id = $_SESSION['user_id'];
 
-         <?php echo "{$scholarship['scholarship_name']}";?>
-         <br>
-         <?php echo "{$scholarship['description']}";?>
+$scholarshipResult = $dbconn->query('SELECT * FROM scholarships LIMIT 1');
+$scholarship = $scholarshipResult->fetch_assoc();
 
+$reqResult = $dbconn->query('SELECT * FROM scholarships_requirements');
+$requirements = $reqResult->fetch_all(MYSQLI_ASSOC);
 
-         <a href="eligibilityDetails.php"><h2>Eligibility</h2></a>
+// Check if student already has an application
+$appCheck = $dbconn->prepare("SELECT applicant_status FROM application WHERE user_id = ?");
+$appCheck->bind_param('i', $user_id);
+$appCheck->execute();
+$existingApp = $appCheck->get_result()->fetch_assoc();
+?>
 
-
-        <a href="benefitDetails.php"><h2>Benefits</h2></a>
-
-
-<div class="applyProcess">
-<h2>Application Process</h2>
-    <div>
-        <h4>
-            Valid and Secured Email Address
-        </h4>
-        <p>
-            Valid email address is needed for logging in to your application account.
-        </p>
+<div class="student-apply-container">
+    <div class="scholarship-header">
+        <h2><?= htmlspecialchars($scholarship['scholarship_name']) ?></h2>
+        <p><?= htmlspecialchars($scholarship['description']) ?></p>
     </div>
-    <div>
-        <h4>
-            Security of Access Credentials
-        </h4>
-        <p>
-            Your User ID and personal info will serve as your login. Keep them secure.
-        </p>
-    </div>
-    <div>
-        <h4>
-            No to multiple accounts!
-        </h4>
-        <p>
-            Do not create multiple accounts. This will delay your access to your application forms.
-        </p>
-    </div>
-    
-</div>
-<!-- for js, make the dates into long readable format  (january 1, 2026) -->
-<div class="sched">
-    <h2>Schedule</h2>
-    Opening Date
-    <br>
-    <?php echo "{$scholarship['opening_date']}";?>
-    <br>
-Closing Date
-<br>
-<?php echo "{$scholarship['closing_date']}";?>
-<br>
-Announcement of New Scholars
-<br>
-<?php echo "{$scholarship['announcement_of_new_scholars']}";?>
-<br>
-<div>
-    <button onclick="addApplication()">Apply</button>
-</div>
 
-    <div id="bg-modal"></div>
-    <div id="modal"></div>
+    <div class="criteria-container">
+        <div class="indexCriteria" onclick="loadPage('partials/eligibilityDetails.php')">
+            Eligibility
+        </div>
+        <div class="indexCriteria" onclick="loadPage('partials/benefitDetails.php')">
+            Benefits
+        </div>
+    </div>
+
+    <div class="applyProcess">
+        <h2>Application Process</h2>
+        <div class="process-card">
+            <h4>Valid and Secured Email Address</h4>
+            <p>A valid email address is needed for logging in to your application account.</p>
+        </div>
+        <div class="process-card">
+            <h4>Security of Access Credentials</h4>
+            <p>Your User ID and personal info will serve as your login. Keep them secure.</p>
+        </div>
+        <div class="process-card">
+            <h4>No to Multiple Accounts!</h4>
+            <p>Do not create multiple accounts. This will delay your access to your application forms.</p>
+        </div>
+    </div>
+
+    <div class="sched">
+        <h2>Schedule</h2>
+        <div class="schedule-grid">
+            <div class="schedule-item">
+                <h3><?= htmlspecialchars($scholarship['opening_date']) ?></h3>
+                <p>Start of Online Application / Registration Period</p>
+            </div>
+            <div class="schedule-item">
+                <h3><?= htmlspecialchars($scholarship['closing_date']) ?></h3>
+                <p>Last Day of Submission of Application</p>
+            </div>
+            <div class="schedule-item">
+                <h3><?= htmlspecialchars($scholarship['announcement_of_new_scholars']) ?></h3>
+                <p>Announcement of New Scholars</p>
+            </div>
+        </div>
+    </div>
+
+    <?php if (!$existingApp): ?>
+        <div class="apply">
+            <div class="apply-btn" onclick="openModal('forms/applicationForm.php')">Apply Now!</div>
+        </div>
+    <?php else: ?>
+        <div class="apply">
+            <p style="font-size:18px; color:#5a199b; font-weight:600;">
+                Your application status: <strong><?= htmlspecialchars($existingApp['applicant_status']) ?></strong>
+            </p>
+        </div>
+    <?php endif; ?>
 </div>

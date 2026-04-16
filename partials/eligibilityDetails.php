@@ -1,18 +1,18 @@
-  <?php
-        include_once 'conn.php';
-        // $student_number=$_GET['sno'];
-        $reqResult=$dbconn->query('select * from scholarships_requirements');
-        $requirements=$reqResult->fetch_all(MYSQLI_ASSOC);  
-    ?>
-    
-<h2>Eligibility Criteria</h2>
+<?php
+include_once '../includes/conn.php';
 
-<div class="reqs">
-<?php foreach ($requirements as $requirement) { ?>
-    <?php echo "{$requirement['requirement_name']}"; ?>
-    <br>
-    <?php echo "{$requirement['description']}"; ?>
-    <br>
-    <br>
-<?php } ?>
+$reqResult = $dbconn->query('SELECT * FROM scholarships_requirements');
+$requirements = $reqResult->fetch_all(MYSQLI_ASSOC);
+?>
+
+<div class="eligibility">
+    <h1>Eligibility Criteria</h1>
+    <div class="criteria-box">
+        <?php foreach ($requirements as $requirement): ?>
+            <div class="criteria-card">
+                <p><strong><?= htmlspecialchars($requirement['requirement_name']) ?></strong></p>
+                <p><?= htmlspecialchars($requirement['description']) ?></p>
+            </div>
+        <?php endforeach; ?>
+    </div>
 </div>

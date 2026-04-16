@@ -1,10 +1,13 @@
 <?php
-include_once 'conn.php';
+include_once '../includes/conn.php';
 
 $application_id = $_POST['application_id'];
 $status = $_POST['status'];
 
-$dbconn->query("UPDATE application SET applicant_status='$status' WHERE application_ID='$application_id'");
+$stmt = $dbconn->prepare("UPDATE application SET applicant_status = ? WHERE application_ID = ?");
+$stmt->bind_param('ss', $status, $application_id);
+$stmt->execute();
 
-header("Location: applications.php");
+header("Location: ../index.php?load=applications");
+exit();
 ?>

@@ -1,44 +1,82 @@
-<script src="jquery-4.0.0.min.js"></script>
-<script src="script.js"></script>
-<link rel="stylesheet" href="style.css"/>
+<div class="application-container">
+  <div class="sidebar">
+    <h2>Application Form</h2>
+    <ul class="steps">
+      <li class="active">1. Personal Information</li>
+      <li>2. Academic Profile</li>
+      <li>3. Submit</li>
+    </ul>
+  </div>
 
-<form action="addApplication.php" method="post">
-    User ID: <input type="text" name="user_ID" required>
-    <br>
-    Gender:
-    <select name="gender">
-        <option>Male</option>
-        <option>Female</option>
-    </select>
-    <br>
-    
-    Birthdate: <input type="date" name="birthdate" required>
-    <br>
-    Applicant Email: <input type="text" name="applicant_email" required>
-    <br>
-    Applicant Address: <input type="text" name="applicant_address" required>
-    <br>
-    Contact Number: <input type="text" name="contact_number" required>
-    <br>
+  <div class="form-panel">
+    <form action="addApplication.php" method="post">
+      <div class="form-group">
+        <label>User ID</label>
+        <input type="text" name="user_ID" required>
+      </div>
 
-    <br>
-     School: <input type="text" name="school" required>
-    <br>
-    Program: <input type="text" name="program" required>
-    <br>
-    School Year: <input type="text" name="school_year" required>
-    <br>
-    Date Enrolled: <input type="date" name="date_enrolled" required>
-    <br>
-    <br>
-    
-    GWA: <input type="number" step="0.01" name="gwa" required>
-    <br>
-    Combined Annual Gross Income: <input type="number" step="0.01" name="combined_annual_gross_income" required>
-    <br>
-    
+      <div class="form-group">
+        <label>Gender</label>
+        <select name="gender" required>
+          <option>Male</option>
+          <option>Female</option>
+        </select>
+      </div>
 
-    <input type="submit" name="submit" value="Submit">
-    <br>
-    <button type="button" id="close-modal">Cancel</button>
-</form>
+      <div class="form-group">
+        <label>Birthdate</label>
+        <input type="date" name="birthdate" required>
+      </div>
+
+      <div class="form-group">
+        <label>Applicant Email</label>
+        <input type="email" name="applicant_email" required>
+      </div>
+
+      <div class="form-group">
+        <label>Applicant Address</label>
+        <input type="text" name="applicant_address" required>
+      </div>
+
+      <div class="form-group">
+        <label>Contact Number</label>
+        <input type="text" name="contact_number" required>
+      </div>
+
+      <div class="form-group">
+        <label>School</label>
+        <input type="text" name="school" required>
+      </div>
+
+      <div class="form-group">
+        <label>Program</label>
+        <input type="text" name="program" required>
+      </div>
+
+      <div class="form-group">
+        <label>School Year</label>
+        <input type="text" name="school_year" required>
+      </div>
+
+      <div class="form-group">
+        <label>Date Enrolled</label>
+        <input type="date" name="date_enrolled" required>
+      </div>
+
+      <div class="form-group">
+        <label>GWA</label>
+        <input type="number" step="0.01" name="gwa" required>
+      </div>
+
+      <div class="form-group">
+        <label>Combined Annual Gross Income</label>
+        <input type="number" step="0.01" name="combined_annual_gross_income" required>
+      </div>
+
+      <div class="form-actions">
+        <input type="submit" name="submit" value="Submit" class="btn-submit">
+        <button type="button" id="close-modal" class="btn-cancel" onclick="history.back()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

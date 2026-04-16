@@ -41,9 +41,13 @@ $role = $_SESSION['roles'] ?? null;
     <?php elseif ($role === 'Student'): ?>
         <script>loadPage('partials/studentApply.php');</script>
     <?php else: ?>
-        <script>openModal('forms/loginForm.php');</script>
+        <!-- <script>openModal('forms/loginForm.php');</script> -->
     <?php endif; ?>
 
 </body>
+
+<div class="content" id="content-area"></div>
+<div id="bg-modal"></div>
+<div id="modal"></div>
 
 </html>
